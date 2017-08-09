@@ -1,19 +1,24 @@
 <div id="player">
   <div class="player-container">
-    <div ng-style="$ctrl.currentTrack.style">
-      <h2>{{ $ctrl.currentTrack.name }}</h2>
-      <h4>{{ $ctrl.artist }}</h4>
-      <div
-          class="control__previous"
-          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index - 1)"
-          style="border:1px solid red;display:inline-block;">
-        PREVIOUS
+    <div class="track-image" ng-style="$ctrl.currentTrack.style">
+    </div>
+    <div class="controls">
+      <div class="track-info">
+        <span>{{ $ctrl.artist }}</span>
+        <span>{{ $ctrl.currentTrack.name }}</span>
       </div>
       <div
-          class="control__next"
-          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index + 1)"
-          style="border:1px solid blue;display:inline-block;">
-        NEXT
+          class="control control__previous"
+          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index - 1)">
+      </div>
+      <div
+          class="control control__main"
+          ng-class="{control__play: $ctrl.playing, control__pause: !$ctrl.playing}"
+          ng-click="$ctrl.playing = !$ctrl.playing">
+      </div>
+      <div
+          class="control control__next"
+          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index + 1)">
       </div>
       <audio ng-src="{{$ctrl.currentTrack.url}}" type="audio/mp3" controls preload="metadata">
         Your browser does not support the <code>audio</code> element.

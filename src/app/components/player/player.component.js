@@ -41,10 +41,6 @@ export const PlayerComponent = {
         url: this.$sce.trustAsResourceUrl(track.url),
         style: {
           'background-image': `url('${track.cover_image}')`,
-          'background-repeat': 'no-repeat',
-          'background-size': 'contain',
-          width: '100vw',
-          height: '100vh',
         }
       }
     }
