@@ -1,7 +1,12 @@
 <div id="player">
-  <h1>Player</h1>
-  <div>
-    {{ $ctrl.album }}
-    <span ng-hide="$ctrl.album">Loading...</span>
+  <div class="player-container">
+    <div ng-style="$ctrl.currentTrack.style">
+      <h2>{{ $ctrl.currentTrack.name }}</h2>
+      <h4>{{ $ctrl.artist }}</h4>
+      <audio ng-src="{{$ctrl.currentTrack.url}}" type="audio/mp3" controls preload="metadata">
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+    </div>
   </div>
+  <p ng-show="$ctrl.loading">Loading...</p>
 </div>
