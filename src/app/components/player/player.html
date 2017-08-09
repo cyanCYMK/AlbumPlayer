@@ -3,6 +3,18 @@
     <div ng-style="$ctrl.currentTrack.style">
       <h2>{{ $ctrl.currentTrack.name }}</h2>
       <h4>{{ $ctrl.artist }}</h4>
+      <div
+          class="control__previous"
+          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index - 1)"
+          style="border:1px solid red;display:inline-block;">
+        PREVIOUS
+      </div>
+      <div
+          class="control__next"
+          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index + 1)"
+          style="border:1px solid blue;display:inline-block;">
+        NEXT
+      </div>
       <audio ng-src="{{$ctrl.currentTrack.url}}" type="audio/mp3" controls preload="metadata">
         Your browser does not support the <code>audio</code> element.
       </audio>
