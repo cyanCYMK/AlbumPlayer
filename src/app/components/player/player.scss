@@ -16,37 +16,56 @@ player {
   top: 0;
   left: 0;
 }
+
+
+/* styles for audio controls */
+$controlMainColor: rgb(106, 187, 156);
+$controlHoverColor: rgb(127, 220, 188);
+$bgColor: white;
+
 .controls {
-  $bgColor: white;
+  display: flex;
   background-color: $bgColor;
   position: relative;
   bottom: 0;
   box-shadow: -30px 5px 89px 61px $bgColor;
+
+  $size: 30px;
+  $ratio: 1.2;
+
+  .control {
+    background-color: $controlMainColor;
+    height: $size;
+    width: $size;
+    &:hover {
+      background-color: $controlHoverColor;
+    }
+  }
+
+  .control__pause {
+    width: $size;
+  	height: $size;
+
+    &:hover {
+      // background-color: transparent;
+      // border-left-color: $controlHoverColor;
+      border-color: $controlHoverColor;
+    }
+  }
+  .control__play {
+    /* show play triangle if paused */
+    background-color: $bgColor;
+    border-bottom: $size/$ratio/1.8 solid transparent;  /* left arrow slant */
+  	border-top: $size/$ratio/1.8 solid transparent; /* right arrow slant */
+  	border-left: $size/$ratio solid $controlMainColor; /* bottom, add background color here */
+    &:hover {
+      background-color: $bgColor;
+      border-left-color: $controlHoverColor;
+    }
+  }
 }
 
-$controlMainColor: rgb(106, 187, 156);
-$controlHoverColor: rgb(127, 220, 188);
-.control {
-  background-color: $controlMainColor;
-  height: 24px;
-  width: 24px;
-  &:hover {
-    background-color: $controlHoverColor;
-  }
-}
-.control__play {
-  width: 0;
-	height: 0;
-  background-color: transparent;
-	border-bottom: 14px solid transparent;  /* left arrow slant */
-	border-top: 14px solid transparent; /* right arrow slant */
-	border-left: 20px solid $controlMainColor; /* bottom, add background color here */
-	font-size: 0;
-	line-height: 0;
-  &:hover {
-    background-color: transparent;
-    border-left-color: $controlHoverColor;
-  }
-}
-.control__pause {
+/* styles for seeking bar and showing times */
+.control__seeking {
+
 }

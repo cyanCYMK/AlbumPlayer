@@ -3,30 +3,33 @@
     <div class="track-image" ng-style="$ctrl.currentTrack.style">
     </div>
     <div class="controls">
+      <div class="control control__previous"
+          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index - 1)">
+      </div>
+      <div class="control control__main"
+          ng-class="{control__pause: $ctrl.playing, control__play: !$ctrl.playing}"
+          ng-click="$ctrl.togglePlay()">
+      </div>
+      <div class="control control__next"
+          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index + 1)">
+      </div>
+      <div class="control__seeking">
+        <div class="control control__played">
+        <div class="control__times">
+          <p class="control__elapsed" ng-model="$ctrl.elapsed"></p>
+          <p class="control__remaining" ng-model="$ctrl.remaining"></p>
+        </div>
+      </div>
+      <audio id="control__audio"
+          ng-src="{{$ctrl.currentTrack.url}}"
+          type="audio/mp3"
+          preload="metadata">
+        Your browser does not support the <code>audio</code> element.
+      </audio>
       <div class="track-info">
         <span>{{ $ctrl.artist }}</span>
         <span>{{ $ctrl.currentTrack.name }}</span>
       </div>
-      <div
-          class="control control__previous"
-          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index - 1)">
-      </div>
-      <div
-          class="control control__main"
-          ng-class="{control__play: $ctrl.playing, control__pause: !$ctrl.playing}"
-          ng-click="$ctrl.togglePlay()">
-      </div>
-      <div
-          class="control control__next"
-          ng-click="$ctrl.changeTrack($ctrl.currentTrack.index + 1)">
-      </div>
-      <audio
-          id="control__audio" ng-src="{{$ctrl.currentTrack.url}}"
-          type="audio/mp3"
-          controls
-          preload="metadata">
-        Your browser does not support the <code>audio</code> element.
-      </audio>
     </div>
   </div>
   <p ng-show="$ctrl.loading">Loading...</p>
