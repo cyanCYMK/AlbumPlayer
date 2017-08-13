@@ -1,42 +1,48 @@
 <div id="player">
   <div class="player-container">
-    <div class="track-image" ng-style="$ctrl.tracks[$ctrl.index].style">
+    <!-- <div class="track-image" ng-style="$ctrl.tracks[$ctrl.index].style">
+    </div> -->
+    <div class="cell image">
+      <img class="track-image" ng-src="{{$ctrl.tracks[$ctrl.index].coverImage}}" />
     </div>
-    <div class="controls">
-      <div class="control control__previous"
-          ng-click="$ctrl.changeTrack($ctrl.tracks[$ctrl.index].index - 1)">
+    <div class="cell track">
+      <div class="controls">
+        <div class="control control__previous"
+            ng-click="$ctrl.changeTrack($ctrl.tracks[$ctrl.index].index - 1)">
           <
-      </div>
-      <div class="control control__pause"
-          ng-show="$ctrl.playing"
-          ng-click="$ctrl.pause()">
-          pause
-      </div>
-      <div class="control control__play"
-          ng-hide="$ctrl.playing"
-          ng-click="$ctrl.play()">
+        </div>
+        <div class="control control__pause"
+            ng-show="$ctrl.playing"
+            ng-click="$ctrl.pause()">
+            pause
+        </div>
+        <div class="control control__play"
+            ng-hide="$ctrl.playing"
+            ng-click="$ctrl.play()">
           play
-      </div>
-      <div class="control control__next"
-          ng-click="$ctrl.changeTrack($ctrl.tracks[$ctrl.index].index + 1)">
+        </div>
+        <div class="control control__next"
+            ng-click="$ctrl.changeTrack($ctrl.tracks[$ctrl.index].index + 1)">
           >
-      </div>
-      <div class="control__seeking">
-        <div class="control control__played">
-        <div class="control__times">
-          <p class="control__elapsed">{{$ctrl.elapsed}}</p>
-          <p class="control__remaining">{{$ctrl.remaining}}</p>
         </div>
       </div>
-      <audio id="control__audio"
-          ng-src="{{$ctrl.tracks[$ctrl.index].url}}"
-          type="audio/mp3"
-          preload="metadata">
-        Your browser does not support the <code>audio</code> element.
-      </audio>
+
       <div class="track-info">
-        <span>{{ $ctrl.artist }}</span>
-        <span>{{ $ctrl.tracks[$ctrl.index].name }}</span>
+        <div class="text">
+          <span>{{ $ctrl.artist }}</span>
+          <span>{{ $ctrl.tracks[$ctrl.index].name }}</span>
+        </div>
+
+        <div class="seeking">
+          <div class="progress" ng-style="$ctrl.progressWidth">
+          </div>
+        </div>
+
+        <div class="times">
+          <p class="elapsed">{{$ctrl.elapsed}}</p>
+          <p class="remaining">{{$ctrl.remaining}}</p>
+        </div>
+
       </div>
     </div>
   </div>

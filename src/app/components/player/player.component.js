@@ -39,7 +39,11 @@ export const PlayerComponent = {
       let seek = currentTrack.sound.seek() || 0;
       let duration = currentTrack.sound.duration();
       this.timer = this._formatTime(Math.round(seek));
-      this.progressWidth = (((seek / currentTrack.sound.duration()) * 100) || 0) + '%';
+
+      this.progressWidth = {
+        width: (((seek / currentTrack.sound.duration()) * 100) || 0) + '%'
+      };
+
       this.elapsed = this.timer;
       this.remaining = this._formatTime(Math.round(duration - seek));
 
@@ -82,11 +86,11 @@ export const PlayerComponent = {
       this.tracks[this.index].sound.play();
     }
 
-    checkPlayTime(playing) {
-      // if playing, start intervals for checking times
-      // get length of track and set to interval check, check every second
-      this.$interval()
-    }
+    // checkPlayTime(playing) {
+    //   // if playing, start intervals for checking times
+    //   // get length of track and set to interval check, check every second
+    //   this.$interval()
+    // }
 
     _initializeCurrentTrack(track, index) {
       // helper function to properties of track for rendering
@@ -106,6 +110,7 @@ export const PlayerComponent = {
          onend: () => {
            // Stop the wave animation.
            console.log('song ended, canceling interval')
+           this.progressWidth = { width: '0%' }
            this.$interval.cancel(this.timerInterval);
 
          },
@@ -116,6 +121,7 @@ export const PlayerComponent = {
          },
          onstop: () => {
            console.log('stopped, canceling interval')
+           this.progressWidth = { width: '0%' };
            this.$interval.cancel(this.timerInterval);
          }
       });
@@ -124,9 +130,7 @@ export const PlayerComponent = {
         ...track,
         index,
         sound,
-        style: {
-          'background-image': `url('${track.cover_image}')`,
-        }
+        coverImage: this.$sce.trustAsResourceUrl(track.cover_image),
       }
     }
     _formatTime(secs) {

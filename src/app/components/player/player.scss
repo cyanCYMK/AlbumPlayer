@@ -1,34 +1,61 @@
 player {
   color: rgba(0, 0, 0, 0.8);
 }
-.player-container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-}
-.track-image {
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  top: 0;
-  left: 0;
-}
 
+$width: 500px;
 
 /* styles for audio controls */
 $controlMainColor: rgb(106, 187, 156);
 $controlHoverColor: rgb(127, 220, 188);
 $bgColor: white;
 
+.player-container {
+  // height: 100vh;
+  width: $width;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell {
+  border: 1px solid red;
+}
+
+
+.cell.image {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  .track-image {
+    width: $width;
+  }
+}
+.cell.track {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 80px;
+  width: $width;
+  box-shadow: -30px 5px 89px 61px $bgColor;
+  align-items: center;
+}
+// .track-image {
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   // width: 100%;
+//   // height: 100%;
+//   position: relative;
+//   top: 0;
+//   left: 0;
+// }
+
+
+
+
 .controls {
   display: flex;
   background-color: $bgColor;
   position: relative;
   bottom: 0;
-  box-shadow: -30px 5px 89px 61px $bgColor;
 
   $size: 30px;
   $ratio: 1.2;
@@ -55,9 +82,9 @@ $bgColor: white;
   .control__play {
     /* show play triangle if paused */
     background-color: $bgColor;
-    border-bottom: $size/$ratio/1.8 solid transparent;  /* left arrow slant */
-  	border-top: $size/$ratio/1.8 solid transparent; /* right arrow slant */
-  	border-left: $size/$ratio solid $controlMainColor; /* bottom, add background color here */
+    // border-bottom: $size/$ratio/1.8 solid transparent;  /* left arrow slant */
+  	// border-top: $size/$ratio/1.8 solid transparent; /* right arrow slant */
+  	// border-left: $size/$ratio solid $controlMainColor; /* bottom, add background color here */
     &:hover {
       background-color: $bgColor;
       border-left-color: $controlHoverColor;
@@ -65,7 +92,44 @@ $bgColor: white;
   }
 }
 
-/* styles for seeking bar and showing times */
-.control__seeking {
+.cell.track {
+  display: flex;
+  justify-content: space-between;
+}
+.controls {
 
+}
+
+/* styles for seeking bar */
+
+
+/* styles for displaying track info */
+.track-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.text {
+  display: flex;
+  justify-content: space-between;
+}
+.seeking {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+  position: relative;
+
+  .progress {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: red;
+  }
+}
+.times {
+  display: flex;
+  justify-content: space-between;
 }
