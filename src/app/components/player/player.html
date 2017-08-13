@@ -29,8 +29,8 @@
 
       <div class="track-info">
         <div class="text">
-          <span>{{ $ctrl.artist }}</span>
-          <span>{{ $ctrl.tracks[$ctrl.index].name }}</span>
+          <span class="track-artist">{{ $ctrl.artist }}</span>
+          <span class="track-title">{{ $ctrl.index + 1 }}. {{ $ctrl.tracks[$ctrl.index].name }}</span>
         </div>
 
         <div class="seeking">

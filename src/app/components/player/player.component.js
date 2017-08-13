@@ -13,6 +13,8 @@ export const PlayerComponent = {
       this.$interval = $interval;
       this.playerService = PlayerService;
       this.Howl = Howl;
+      this.elapsed = '00:00';
+      this.remaining = '00:00';
     }
 
     $onInit() {
@@ -73,7 +75,7 @@ export const PlayerComponent = {
       // for views
       this.playing = false; // for viewing pause/play button
       this.remaining = this._formatTime(Math.round(this.tracks[this.index].sound.duration()));
-      this.elapsed = '';
+      this.elapsed = '00:00';
     }
 
     pause() {
@@ -137,7 +139,7 @@ export const PlayerComponent = {
       const minutes = Math.floor(secs / 60) || 0;
       const seconds = (secs - minutes * 60) || 0;
 
-      return `${minutes}:${(seconds < 10 ? 0 : '')}${seconds}`;
+      return `${(minutes < 10 ? 0 : '')}${minutes}:${(seconds < 10 ? 0 : '')}${seconds}`;
     }
   }
 };
