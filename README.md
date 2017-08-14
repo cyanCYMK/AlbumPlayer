@@ -1,5 +1,9 @@
 ## Fundbox Front-End Assignment
 
+#### `npm install`
+#### `npm start`
+#### If page not already open, navigate to `localhost:8080`
+
  Write a Single Page Application, according to the attached design (PSD, Sketch and exports attached)
  The app is an interface to play music from a API placeholder
 
@@ -20,6 +24,6 @@ Please open a public repo on Github with the assignment code.
 Create an "initial" commit without code when you begin.
 Create an "done" commit, to timestamp when you have finished.
 Provide a clear README as to how to run your app (react-server, webpack, node... up to you)
-When you're done, please reply with a link to the github repo. 
+When you're done, please reply with a link to the github repo.
 
 Good luck!
