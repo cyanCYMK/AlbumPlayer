@@ -9,21 +9,17 @@
       <div class="controls">
         <div class="control control__previous"
             ng-click="$ctrl.changeTrack($ctrl.tracks[$ctrl.index].index - 1)">
-          <
         </div>
         <div class="control control__pause"
             ng-show="$ctrl.playing"
             ng-click="$ctrl.pause()">
-            pause
         </div>
         <div class="control control__play"
             ng-hide="$ctrl.playing"
             ng-click="$ctrl.play()">
-          play
         </div>
         <div class="control control__next"
             ng-click="$ctrl.changeTrack($ctrl.tracks[$ctrl.index].index + 1)">
-          >
         </div>
       </div>
 
