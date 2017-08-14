@@ -21,14 +21,12 @@ export const PlayerComponent = {
       this.loading = true;
       this.playing = false;
       this.playerService.getAlbum().then(({album_name, artist, tracks}) => {
-        console.log('got album:', album_name)
         this.loading = false;
         this.tracks = tracks;
         this.albumName = album_name;
         this.artist = artist;
 
         // by default set current track to first track
-        // TODO: separate this into $postLink and set initial track value there
         // TODO: separate audio controls into stateless component
         this.index = 0;
         this.tracks[0] = this._initializeCurrentTrack(this.tracks[0], 0);
@@ -36,7 +34,7 @@ export const PlayerComponent = {
     }
 
     step() {
-      // called with requestAnimationFrame to update playback position
+      /* updates seek bar and track timers, sets interval */
       const currentTrack = this.tracks[this.index];
       let seek = currentTrack.sound.seek() || 0;
       let duration = currentTrack.sound.duration();
@@ -49,7 +47,7 @@ export const PlayerComponent = {
       this.elapsed = this.timer;
       this.remaining = this._formatTime(Math.round(duration - seek));
 
-      // If the sound is still playing, continue stepping.
+      // if sound isn't playing, cancel the interval
       if (!currentTrack.sound.playing()) {
         this.$interval.cancel(this.timerInterval);
       }
@@ -58,14 +56,9 @@ export const PlayerComponent = {
     changeTrack(index) {
       if (index < 0 || index > this.tracks.length - 1) return;
 
-      console.log('stopping track:', this.index)
-      console.log('changing track to:', index)
-
       const previousTrack = this.tracks[this.index];
       previousTrack.sound.stop();
 
-      // change state for intervals and index
-      // this.$interval.cancel(this.timerInterval);
       this.index = index;
 
       if (!this.tracks[index].sound) {
@@ -88,14 +81,8 @@ export const PlayerComponent = {
       this.tracks[this.index].sound.play();
     }
 
-    // checkPlayTime(playing) {
-    //   // if playing, start intervals for checking times
-    //   // get length of track and set to interval check, check every second
-    //   this.$interval()
-    // }
-
     _initializeCurrentTrack(track, index) {
-      // helper function to properties of track for rendering
+      // sets properties of track for rendering and sound
       const sound = new Howl({
         src: [track.url],
         onplay: () => {
@@ -103,27 +90,23 @@ export const PlayerComponent = {
           this.timerInterval = this.$interval(this.step.bind(this), 1000);
          },
          onload: () => {
-           // Set remaining time.
-           console.log('song loaded')
+           // sets timer for track length
            this.$scope.$apply(() => {
              this.remaining = this._formatTime(Math.round(this.tracks[this.index].sound.duration()));
            });
          },
          onend: () => {
-           // Stop the wave animation.
-           console.log('song ended, canceling interval')
-           this.progressWidth = { width: '0%' }
+           // resets seek bar and cancels interval
+           this.$scope.$apply(() => this.progressWidth = { width: '0%' });
            this.$interval.cancel(this.timerInterval);
 
          },
          onpause: () => {
-           // Stop the wave animation.
-           console.log('paused, canceling interval')
            this.$interval.cancel(this.timerInterval);
          },
          onstop: () => {
-           console.log('stopped, canceling interval')
-           this.progressWidth = { width: '0%' };
+           // resets seek bar and cancels interval
+           this.$scope.$apply(() => this.progressWidth = { width: '0%' });
            this.$interval.cancel(this.timerInterval);
          }
       });
@@ -135,7 +118,9 @@ export const PlayerComponent = {
         coverImage: this.$sce.trustAsResourceUrl(track.cover_image),
       }
     }
+
     _formatTime(secs) {
+      // helper function to format timers
       const minutes = Math.floor(secs / 60) || 0;
       const seconds = (secs - minutes * 60) || 0;
 

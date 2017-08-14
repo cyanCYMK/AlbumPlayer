@@ -2,7 +2,7 @@ player {
   color: rgba(0, 0, 0, 0.8);
 }
 
-$width: 500px;
+$width: 500px;  // player width
 
 /* styles for audio controls */
 $controlMainColor: rgb(106, 187, 156);
@@ -20,9 +20,9 @@ $ratio: 1.2;
   border-left: $size solid $color;
   &:hover {
     border-left-color: $hoverColor;
+    cursor: pointer;
   }
 }
-
 @mixin arrow-left($color, $size, $hoverColor) {
   width: 0;
   height: 0;
@@ -30,12 +30,12 @@ $ratio: 1.2;
   border-bottom: $size*0.75-1 solid transparent;
   border-right: $size solid $color;
   &:hover {
-    border-right-color: $hoverColor
+    border-right-color: $hoverColor;
+    cursor: pointer;
   }
 }
 
 .player-container {
-  // height: 100vh;
   width: $width;
   display: flex;
   flex-direction: column;
@@ -67,14 +67,9 @@ $ratio: 1.2;
   position: relative;
   bottom: 0;
 
-
   .control {
-    // background-color: $controlMainColor;
     height: $size;
     width: $size;
-    &:hover {
-      // border-color: $controlHoverColor;
-    }
   }
 
   .control__pause {
@@ -98,19 +93,11 @@ $ratio: 1.2;
 
     &:hover {
       background-color: $controlHoverColor;
+      cursor: pointer;
     }
   }
   .control__play {
-    /* show play triangle if paused */
     @include arrow-right($controlMainColor, $size, $controlHoverColor);
-    // background-color: $bgColor;
-    // border-bottom: $size/$ratio/1.8 solid transparent;  /* left arrow slant */
-  	// border-top: $size/$ratio/1.8 solid transparent; /* right arrow slant */
-  	// border-left: $size/$ratio solid $controlMainColor; /* bottom, add background color here */
-    // &:hover {
-    //   background-color: $bgColor;
-    //   border-left-color: $controlHoverColor;
-    // }
   }
 
   .control__previous {
@@ -128,6 +115,7 @@ $ratio: 1.2;
     }
     &:hover::after {
       background-color: $controlHoverColor;
+      cursor: pointer;
     }
   }
   .control__next {
@@ -145,6 +133,7 @@ $ratio: 1.2;
     }
     &:hover::after {
       background-color: $controlHoverColor;
+      cursor: pointer;
     }
   }
 }
@@ -154,12 +143,6 @@ $ratio: 1.2;
   justify-content: space-between;
   padding: 0 28px;
 }
-.controls {
-
-}
-
-/* styles for seeking bar */
-
 
 /* styles for displaying track info */
 .track-info {
@@ -173,6 +156,7 @@ $ratio: 1.2;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.7);
 }
+
 .text {
   display: flex;
   justify-content: space-between;
@@ -187,6 +171,7 @@ $ratio: 1.2;
     text-overflow: ellipsis;
   }
 }
+
 .seeking {
   width: 100%;
   height: 2px;
@@ -204,6 +189,7 @@ $ratio: 1.2;
     background-color: $controlHoverColor;
   }
 }
+
 .times {
   display: flex;
   justify-content: space-between;
